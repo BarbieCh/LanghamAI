@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Innovation at Langham Hospitality Group</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --langham-gold: #C4A962;
+            --langham-dark: #2C2C2C;
+            --langham-light: #F5F5F5;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            background: var(--langham-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .slide-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .slide {
+            background: white;
+            padding: 40px;
+            width: 80%;
+            max-width: 1000px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .slide h1 {
+            color: var(--langham-dark);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--langham-gold);
+            padding-bottom: 10px;
+        }
+        .slide h2 {
+            color: var(--langham-gold);
+            font-size: 1.8em;
+        }
+        .slide ul {
+            color: var(--langham-dark);
+            line-height: 1.8;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--langham-dark);
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            background: var(--langham-gold);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background: #A08440;
+        }
+        .stat-box {
+            background: var(--langham-light);
+            padding: 20px;
+            margin: 10px 0;
+            border-left: 4px solid var(--langham-gold);
+        }
+        .case-study {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .chart-container {
+            position: relative;
+            margin: 20px auto;
+            height: 300px;
+            width: 100%;
+        }
+        .dual-chart {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .chart-box {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .agenda-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .agenda-number {
+            background: var(--langham-gold);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        .highlight-box {
+            background: linear-gradient(45deg, var(--langham-gold), #E5D5A8);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        @media (max-width: 768px) {
+            .slide {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide active" id="slide1">
+            <h1>Transforming Luxury Hospitality Through AI</h1>
+            <h2>A Vision for Langham Hospitality Group</h2>
+            <div class="highlight-box">
+                <p>"Where Timeless Elegance Meets Artificial Intelligence"</p>
+            </div>
+            <div class="stat-box">
+                <p>Global Presence: 4 Brands | 37 Destinations | 48 Hotels</p>
+            </div>
+        </div>
+
+        <div class="slide" id="slide2">
+            <h1>Agenda</h1>
+            <div class="agenda-item">
+                <div class="agenda-number">1</div>
+                <div>Market Overview & Opportunity</div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">2</div>
+                <div>AI Revolution in Hospitality</div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">3</div>
+                <div>Langham's AI Vision</div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">4</div>
+                <div>Implementation Strategy</div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">5</div>
+                <div>Investment & Returns</div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide3">
+            <h1>Market Overview</h1>
+            <div class="chart-container">
+                <canvas id="marketChart"></canvas>
+            </div>
+            <div class="stat-box">
+                <ul>
+                    <li>Luxury hotel market: $95.1B (2023)</li>
+                    <li>AI in hospitality: $1.21B (2023)</li>
+                    <li>CAGR: 25.8% (2024-2030)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide4">
+            <h1>AI Revolution in Hospitality</h1>
+            <div class="dual-chart">
+                <div class="chart-box">
+                    <canvas id="aiAdoptionChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <canvas id="aiImpactChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide5">
+            <h1>Cross-Industry AI Success Stories</h1>
+            <div class="chart-container">
+                <canvas id="industryComparisonChart"></canvas>
+            </div>
+            <div class="case-study">
+                <h3>Key Learnings for Langham:</h3>
+                <ul>
+                    <li>Personalization drives loyalty (Retail)</li>
+                    <li>Predictive analytics reduces costs (Manufacturing)</li>
+                    <li>Real-time adaptability increases satisfaction (Banking)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide6">
+            <h1>Langham's AI Vision</h1>
+            <div class="highlight-box">
+                <h3>The Future of Luxury Hospitality</h3>
+                <ul>
+                    <li>Hyper-personalized guest experiences</li>
+                    <li>Predictive service excellence</li>
+                    <li>Smart property management</li>
+                    <li>Sustainable operations</li>
+                </ul>
+            </div>
+            <div class="chart-container">
+                <canvas id="visionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="slide" id="slide7">
+            <h1>Implementation Strategy</h1>
+            <div class="chart-container">
+                <canvas id="implementationChart"></canvas>
+            </div>
+            <div class="stat-box">
+                <ul>
+                    <li>Phase 1: Smart Room Deployment</li>
+                    <li>Phase 2: AI Concierge Integration</li>
+                    <li>Phase 3: Revenue Management System</li>
+                    <li>Phase 4: Cross-Property Integration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide8">
+            <h1>Investment Breakdown</h1>
+            <div class="chart-container">
+                <canvas id="investmentChart"></canvas>
+            </div>
+            <div class="stat-box">
+                <p>Total Investment: $18.75M</p>
+                <ul>
+                    <li>Hardware Infrastructure: $4.5M</li>
+                    <li>AI Software Licenses: $3.2M</li>
+                    <li>Integration Services: $2.8M</li>
+                    <li>Staff Training: $1.5M</li>
+                    <li>Implementation: $3.0M</li>
+                    <li>Contingency: $3.75M</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide9">
+            <h1>Return on Investment</h1>
+            <div class="dual-chart">
+                <div class="chart-box">
+                    <canvas id="roiChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <canvas id="savingsChart"></canvas>
+                </div>
+            </div>
+            <div class="stat-box">
+                <p>3-Year Projection:</p>
+                <ul>
+                    <li>Total Returns: $56.2M</li>
+                    <li>ROI: 2.5x</li>
+                    <li>Cost Reduction: 22%</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide10">
+            <h1>Next Steps</h1>
+            <div class="highlight-box">
+                <h3>Immediate Actions:</h3>
+                <ul>
+                    <li>Form AI steering committee</li>
+                    <li>Begin vendor selection process</li>
+                    <li>Develop detailed implementation timeline</li>
+                    <li>Create staff training program</li>
+                </ul>
+            </div>
+            <div class="stat-box">
+                <p>Timeline to Launch: Q1 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            document.getElementById('slide' + slideNumber).classList.add('active');
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Market Overview Chart
+        new Chart(document.getElementById('marketChart'), {
+            type: 'line',
+            data: {
+                labels: ['2023', '2024', '2025', '2026', '2027'],
+                datasets: [{
+                    label: 'AI in Hospitality Market Size (Billions)',
+                    data: [1.21, 1.52, 1.91, 2.40, 3.02],
+                    borderColor: '#C4A962',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // AI Adoption Chart
+        new Chart(document.getElementById('aiAdoptionChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Industry AI Adoption Rate (%)',
+                    data: [35, 48, 65],
+                    backgroundColor: '#C4A962'
+                }]
+            }
+        });
+
+        // Investment Breakdown Chart
+        new Chart(document.getElementById('investmentChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Hardware', 'Software', 'Integration', 'Training', 'Implementation', 'Contingency'],
+                datasets: [{
+                    data: [4.5, 3.2, 2.8, 1.5, 3.0, 3.75],
+                    backgroundColor: [
+                        '#C4A962', '#2C2C2C', '#847344', '#D4C9A8', '#594E2D', '#A69567'
+                    ]
+                }]
+            }
+        });
+
+        // ROI Chart
+        new Chart(document.getElementById('roiChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3'],
+                datasets: [{
+                    label: 'Cumulative Returns (Millions)',
+                    data: [11.4, 29.6, 56.2],
+                    backgroundColor: '#C4A962'
+                }]
+            }
+        });
+
+        // Add more chart initializations as needed...
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
